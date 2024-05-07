@@ -1,0 +1,74 @@
+html {
+    height: 100%;
+}
+
+body {
+    background: url('/media/bg-with-slogan.png') no-repeat center center fixed;
+    background-size: cover;
+    height: calc(100vh - 54px);
+    color: #36454F;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+
+}
+
+.header-container {
+    padding-top: 54px;
+}
+
+.btn {
+    color: silver;
+    border: 1px solid silver;
+    text-align: center;
+    transition: border-color 0.2s ease-in-out;
+    background: transparent;
+    cursor: pointer;
+}
+
+.btn:hover {
+    border-color: #f9c910;
+}
+
+
+.btn-without-border {
+    border: 1px solid transparent;
+}
+
+.btn-without-border:hover {
+    border: 1px solid silver;
+}
+
+.btn-highlighted {
+    border: 1px solid #f9c910;
+}
+
+.btn.active {
+    color: silver;
+    border: 1px solid #3c3c3c;
+}
+
+h1 {
+    font-size: 6.5rem;
+    line-height: 7rem;
+    text-align: center;
+    color: silver;
+    font-family: 'Tangerine', cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  h1:after {
+    content: "";
+    display: block;
+    width: 256px;
+    height: 40px;
+    background-image: url('/media/decoration-silver.svg');
+    background-size: contain;
+    margin-top: 25px;
+    margin-left: calc(50% - 128px);
+  }
+
+  .slogan {
+      margin-left:-125px;
+  }
