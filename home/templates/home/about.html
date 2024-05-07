@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<div class="overlay"></div>
+<div class="container-fluid">
+    <div class="row align-items-center mt-5">
+        <div class="col-6 text-center">
+
+                <h2 class="text-center">About Me</h2>
+                <p class="text-center">Hi! My name is Anna. As a newly qualified life coach, my passion lies in guiding
+                    individuals to unlock
+                    their full potential and achieve their goals. While my professional
+                    experience may be limited, my genuine enthusiasm, empathetic nature,
+                    and strong commitment to continuous learning make me a dedicated
+                    partner in your personal growth journey. Together, we will embark on
+                    a transformative process of self-discovery, setting meaningful
+                    objectives, and creating actionable plans to achieve them. With my
+                    unwavering support and your willingness to embrace change, we will
+                    navigate obstacles, cultivate resilience, and create positive change
+                    in your life.</p>
+
+        </div>
+        <div class="col-6">
+            <div class="about-me-image">
+                <img src="{% static 'coaching-session.jpg'%}" class="img-fluid" alt="coaching session">
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col text-center">
+            <a href="{% url 'account_signup' %}" class="btn btn-large" role="button" aria-disabled="true">Find out more..</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

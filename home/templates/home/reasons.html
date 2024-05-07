@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="overlay"></div>
+<div class="container-fluid">
+    <div class="row h-100">
+        <div class="col my-auto">
+            <section class="page-section" id="services">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Services</h2>
+                    <h3 class="section-subheading text-muted">A life coaching provide valuable guidance and support in
+                        achieving your goals, personal growth, overcoming obstacles, and finding balance in life.</h3>
+                </div>
+                <div class="row text-center justify-content-center mt-5">
+                    <div class="col-md-6 text-center">
+                        <div>
+                            <img src="{% static 'icon-target.png' %}">
+                        </div>
+                        <h4 class="my-3">Clarity and Goal Setting</h4>
+                        <p class="text-muted">"Clarity and Goal Setting" involves helping individuals define their
+                            objectives and develop a clear understanding of what they want to achieve. Through coaching,
+                            clients explore their values, strengths, and aspirations to set specific,
+                            achievable goals. This process enhances focus, motivation, and direction,
+                            facilitating personal and professional growth.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div>
+                            <img src="{% static 'icon-growth.png' %}">
+                        </div>
+                        <h4 class="my-3">Personal Growth</h4>
+                        <p class="text-muted">"Personal Growth" encompasses the continuous process of self-improvement,
+                            emotional development, and realization of one's potential. Through coaching, individuals
+                            explore areas such as self-awareness, confidence-building, resilience, and skill development
+                            to enhance their overall well-being and fulfillment in life. This journey involves setting
+                            goals, overcoming obstacles, and embracing opportunities for growth and self-discovery.
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <div>
+                            <img src="{% static 'icon-overcome.png' %}">
+                        </div>
+                        <h4 class="my-3">Overcoming Obstacles</h4>
+                        <p class="text-muted">"Overcoming Obstacles" involves identifying and addressing challenges that
+                            hinder personal or professional progress. Through coaching, individuals develop strategies
+                            to navigate barriers such as fear, self-doubt, limiting beliefs, and external factors. By
+                            cultivating resilience, problem-solving skills, and a growth mindset, clients overcome
+                            obstacles, build confidence, and move closer to their desired outcomes.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div>
+                            <img src="{% static 'icon-balance.png' %}">
+                        </div>
+                        <h4 class="my-3">Work-Life Balance</h4>
+                        <p class="text-muted">"Work-Life Balance" is the equilibrium between professional
+                            responsibilities and personal well-being. In coaching, individuals assess their priorities,
+                            boundaries, and time management to create harmony between work, family, health, and leisure.
+                            Through goal-setting, stress management, and boundary-setting techniques, clients achieve
+                            greater fulfillment and satisfaction in both their professional and personal lives.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

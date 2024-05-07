@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    background: url('/media/bg-with-slogan.png') no-repeat center center fixed;
+    background: url('/static/header-bg.png') no-repeat center center fixed;
     background-size: cover;
     height: calc(100vh - 54px);
     color: #36454F;
@@ -24,6 +24,16 @@ body {
     transition: border-color 0.2s ease-in-out;
     background: transparent;
     cursor: pointer;
+}
+
+.btn-large {
+    font-size: 2rem;
+    line-height: 1em;
+    text-transform: uppercase;
+    padding: 0.5em 1.666em;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-style: normal;
 }
 
 .btn:hover {
@@ -56,19 +66,182 @@ h1 {
     font-family: 'Tangerine', cursive;
     font-weight: 400;
     font-style: normal;
-  }
+}
 
-  h1:after {
+h1:after {
     content: "";
     display: block;
     width: 256px;
     height: 40px;
-    background-image: url('/media/decoration-silver.svg');
+    background-image: url('/static/decoration-silver.svg');
+    background-size: contain;
+    margin-top: 25px;
+    margin-left: calc(50% - 128px);
+}
+
+  h2:after {
+    content: "";
+    display: block;
+    width: 256px;
+    height: 40px;
+    background-image: url('/static/decoration.svg');
     background-size: contain;
     margin-top: 25px;
     margin-left: calc(50% - 128px);
   }
 
-  .slogan {
-      margin-left:-125px;
+.slogan {
+    margin-left: -125px;
+}
+
+.overlay {
+    height: 100%;
+    width: 100%;
+    top: 54px;
+    left: 0;
+    position: fixed;
+    background: white;
+    z-index: -1;
+}
+
+h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+
+h2, .h2 {
+  font-size: calc(1.325rem + 0.9vw);
+}
+@media (min-width: 1200px) {
+  h2, .h2 {
+    font-size: 2rem;
+  }
+}
+
+h3, .h3 {
+  font-size: calc(1.3rem + 0.6vw);
+}
+@media (min-width: 1200px) {
+  h3, .h3 {
+    font-size: 1.75rem;
+  }
+}
+
+h4, .h4 {
+  font-size: calc(1.275rem + 0.3vw);
+}
+@media (min-width: 1200px) {
+  h4, .h4 {
+    font-size: 1.5rem;
+  }
+}
+
+h5, .h5 {
+  font-size: 1.25rem;
+}
+
+h6, .h6 {
+  font-size: 1rem;
+}
+
+.icon {
+    width: 100px;
+    height: 100px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: block;
+  }
+
+  .icon-target {
+    background-image: url("/static/icon-target.png");
+  }
+
+  .icon-growth {
+    background-image: url("/static/icon-growth.png");
+  }
+
+  .icon-overcome {
+    background-image: url("/static/icon-overcome.png");
+  }
+
+  .icon-balance {
+    background-image: url("/static/icon-balance.png");
+  }
+
+  .contact {
+    max-width: 60%;
+    align-items: center;
+    padding-right: 30px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  .contact h3 {
+    padding: 0 15px;
+    text-transform: uppercase;
+  }
+
+  /* CONTACT FORM */
+
+  .form-contact {
+    display: flex;
+    margin-top: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 70%
+  }
+
+  .form-group {
+    width: 100%;
+    padding: 0 15px;
+    margin-bottom: 20px;
+  }
+
+  .form-group-50 {
+    width: 50%;
+  }
+
+  .form-contact textarea,
+  .form-group input[type="text"],
+  .form-group input[type="email"] {
+    padding: 8px 12px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #3c3c3c;
+    background: transparent;
+    resize: none;
+    outline: none;
+    transition: border 0.2s ease-in-out;
+    color: #3c3c3c;
+    max-width: none;
+  }
+
+  .form-group:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .form-contact input[type="text"]:focus,
+  .form-contact input[type="email"]:focus,
+  .form-contact textarea:focus {
+    border-bottom: 3px solid #f9c910;
+  }
+
+  .form-contact input[type="text"]::placeholder,
+  .form-contact input[type="email"]::placeholder,
+  .form-contact textarea::placeholder {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #3c3c3c;
+  }
+
+  .contact form [type="submit"] {
+    margin-top: 35px;
   }
