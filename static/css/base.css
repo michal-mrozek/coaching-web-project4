@@ -26,18 +26,9 @@ body {
     cursor: pointer;
 }
 
-.btn-large {
-    font-size: 2rem;
-    line-height: 1em;
-    text-transform: uppercase;
-    padding: 0.5em 1.666em;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-    font-style: normal;
-}
-
-.btn:hover {
+.nav-item .btn:hover {
     border-color: #f9c910;
+    color: gold !important;
 }
 
 
