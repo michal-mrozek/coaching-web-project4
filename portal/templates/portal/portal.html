@@ -14,13 +14,13 @@
 <div class="overlay"></div>
 <div class="container-fluid ">
     <div class="row pt-3 contener">
-        <div class="col-6 text-center">
-            <div class="row">
-                <div class="col">
-                    <h2>Regular contact with your coach is vital. It ensures alignment of goals, provides valuable
-                        feedback, fosters accountability, and builds a supportive partnership. In essence,
-                        it's the key to maximizing your potential and staying on track towards success.</h2>
-                </div>
+        <div class="col-6 text-left">
+            <div class="row m-0">
+
+                {% for obj in messages %}
+                <a class="text-decoration-none" href="{% url 'portal_replay' obj.0.id %}"><strong>{{ obj.0.message_subject }}</strong>. Last message on {{ obj.1}}</a>
+                {% endfor %}
+
             </div>
             <div class="row justify-content-center">
                 <div class="col text-center">
@@ -40,7 +40,9 @@
         </div>
 
         <div class="col-6 overflow-y-scroll">
-            {% for message in messages %}
+            {% if id %}
+
+            {% for message in conversation %}
             <div>
                 <div class="col">
                     <div class="card-body mb-1">
@@ -52,6 +54,29 @@
                 </div>
             </div>
             {% endfor %}
+            <div>
+                <div class="row justify-content-center">
+                    <div class="col text-center">
+
+                        <form class="form-contact form-message mt-5" method="post" action="{% url 'portal_replay' id %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <textarea name="message" placeholder="Message" rows="3" required></textarea>
+                            </div>
+                            <button class="btn btn-primary btn-lg" type="submit">Replay</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div>
+                <div class="col">
+                    <p class="card-text">Choose the conversation to display it here. Or start the new one.</p>
+                    <hr>
+                </div>
+            </div>
+            {% endif %}
+
         </div>
 
 
