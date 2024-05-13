@@ -2,6 +2,7 @@ from django.http import HttpResponse
 
 from .models import Order, OrderItem
 import time
+import stripe
 
 class StripeWH_Handler:
     """Handle Stripe webhooks"""
@@ -24,36 +25,33 @@ class StripeWH_Handler:
         intent = event.data.object
 
         pid = intent.id
-
+        membership_price = intent.metadata.membership_price
+        membership_len = intent.metadata.membership_len
+        
         # Get the Charge object
         stripe_charge = stripe.Charge.retrieve(
             intent.latest_charge
         )
 
         billing_details = stripe_charge.billing_details
-        shipping_details = intent.shipping
-
-
-        # Clean data in the shipping details
-        for field, value in shipping_details.address.items():
-            if value == "":
-                shipping_details.address[field] = None
+        
 
         order_exists = False
         attempt = 1
         while attempt <= 5:
             try:
                 order = Order.objects.get(
-                    full_name__iexact=shipping_details.name,
+                    full_name__iexact=billing_details.name,
                     email__iexact=billing_details.email,
-                    phone_number__iexact=shipping_details.phone,
-                    country__iexact=shipping_details.address.country,
-                    postcode__iexact=shipping_details.address.postal_code,
-                    town_or_city__iexact=shipping_details.address.city,
-                    street_address__iexact=shipping_details.address.line,
-                    grand_total=grand_total,
+                    phone_number__iexact=billing_details.phone,
+                    country__iexact=billing_details.address.country,
+                    postcode__iexact=billing_details.address.postal_code,
+                    town_or_city__iexact=billing_details.address.city,
+                    street_address__iexact=billing_details.address.line1,
+                    order_total=membership_price,
                     stripe_pid=pid,
                 )
+                print(order)
                 order_exists = True
                 break
             except Order.DoesNotExist:
@@ -67,20 +65,21 @@ class StripeWH_Handler:
             order = None
             try:
                 order = Order.objects.create(
-                    full_name=shipping_details.name,
+                    full_name=billing_details.name,
                     email=billing_details.email,
-                    phone_number=shipping_details.phone,
-                    country=shipping_details.address.country,
-                    postcode=shipping_details.address.postal_code,
-                    town_or_city=shipping_details.address.city,
-                    street_address=shipping_details.address.line,
+                    phone_number=billing_details.phone,
+                    country=billing_details.address.country,
+                    postcode=billing_details.address.postal_code,
+                    town_or_city=billing_details.address.city,
+                    street_address=billing_details.address.line1,
+                    order_total=membership_price,
                     stripe_pid=pid,
                 )
 
                 order_item = OrderItem(
                     order=order,
-                    product=product,
-                    quantity=item_data,
+                    membership_length=membership_len,
+                    membership_price=membership_price,
                         )
                 order_item.save()
 

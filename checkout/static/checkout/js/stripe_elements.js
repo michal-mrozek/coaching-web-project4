@@ -55,10 +55,14 @@ form.addEventListener('submit', function (ev) {
     var saveInfo = Boolean($('#id-save-info').attr('checked'));
     // From using {% csrf_token %} in the form
     var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+    var membership_len = $('input[name="membership_len"]').val();
+    var membership_price = $('input[name="membership_price"]').val();
     var postData = {
         'csrfmiddlewaretoken': csrfToken,
         'client_secret': clientSecret,
         'save_info': saveInfo,
+        'membership_price': membership_price,
+        'membership_len': membership_len,
     };
     var url = '/checkout/cache_checkout_data/';
 
