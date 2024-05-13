@@ -163,7 +163,7 @@
                         <h5 class="card-title">Monthly Subscriptions:</h5>
                         <p class="card-text">Flexibility, affordability, convenience. Try new services, easy budgeting,
                             no long-term commitment. Monthly subscriptions adapt to your needs.</p>
-                        <a href="#" class="btn btn-primary">£350</a>
+                        <a href="{% url 'checkout' %}?months=1&price=350" class="btn btn-primary">£350</a>
                     </div>
                 </div>
             </div>
@@ -173,7 +173,7 @@
                         <h5 class="card-title">Quarterly Subscriptions:</h5>
                         <p class="card-text">Convenience and value. Longer interval between renewals. Enjoy seasonal
                             or themed deliveries. Easy to manage and budget.</p>
-                        <a href="#" class="btn btn-primary">£900</a>
+                        <a href="{% url 'checkout' %}?months=3&price=900" class="btn btn-primary">£900</a>
                     </div>
                 </div>
             </div>
@@ -183,7 +183,7 @@
                         <h5 class="card-title">Annual Subscriptions:</h5>
                         <p class="card-text">Save money, consistent access, long-term commitment. Simplified budgeting,
                             convenience, and uninterrupted service.</p>
-                        <a href="#" class="btn btn-primary">£2500</a>
+                        <a href="{% url 'checkout' %}?months=12&price=2500" class="btn btn-primary">£2500</a>
                     </div>
                 </div>
             </div>
