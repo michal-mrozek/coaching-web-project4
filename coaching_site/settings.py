@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'home',
-    'services',
     'portal',
     'profiles',
     'checkout',

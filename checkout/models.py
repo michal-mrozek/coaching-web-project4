@@ -51,7 +51,7 @@ class Order(models.Model):
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, null=False, blank=False,
                               on_delete=models.CASCADE,
-                              related_name='lineitem')
+                              related_name='orderitems')
     membership_length = models.IntegerField(null=False, blank=False)
     membership_price = models.IntegerField(null=False, blank=False)
 

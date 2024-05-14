@@ -19,7 +19,7 @@
         </div>
         <div class="col contact">
             <h2>Contact</h2>
-            <h3>Please fill the form to contact me</h3>
+            <h5>Please fill the form to contact me</h5>
             <form class="form-contact" method="post" action={% url 'contact' %}>
                 {% csrf_token %}
                 <div class="form-group form-group-50"><input type="text" name="name" placeholder="Name" required></div>

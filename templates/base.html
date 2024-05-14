@@ -71,10 +71,14 @@
                 <ul class="navbar-nav">
                     {% if request.user.is_authenticated %}
                     <li class="nav-item">
+                        {% if request.user.userprofile.premium %}
                         <a href="{% url 'portal' %}" class="btn btn-without-border">Portal</a>
+                        {% else %}
+                        <a href="{% url 'work_with_me' %}" class="btn btn-without-border">Portal</a>
+                        {% endif %}
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="btn btn-without-border">My Profile</a>
+                        <a href="{% url 'profile' %}" class="btn btn-without-border">My Profile</a>
                     </li>
                     <li class="nav-item">
                         <a href="{% url 'account_logout' %}" class="btn btn-highlighted">Log Out</a>

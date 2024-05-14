@@ -16,12 +16,19 @@
     <div class="row pt-3 contener">
         <div class="col-6 text-left">
             <div class="row m-0">
-
+                {% if messages.length != 0 %}
                 {% for obj in messages %}
-                <a class="text-decoration-none" href="{% url 'portal_replay' obj.0.id %}"><strong>{{ obj.0.message_subject }}</strong>. Last message on {{ obj.1}}</a>
+                <a class="text-decoration-none" href="{% url 'portal_replay' obj.0.id %}">
+                    <strong>{{ obj.0.message_subject }}</strong>. Last message on {{ obj.1}}{% if is_coach %} by {{ obj.2 }} {% endif %} </a>
                 {% endfor %}
+                {% else %}
+                <p class="card-text">You do not have started conversation yet. Feel free to start one below.</p>
+                {% endif %}
 
             </div>
+
+            {% if is_coach %}
+            {% else %}
             <div class="row justify-content-center">
                 <div class="col text-center">
 
@@ -36,6 +43,7 @@
                     </form>
                 </div>
             </div>
+            {% endif %}
 
         </div>
 
@@ -45,9 +53,9 @@
             {% for message in conversation %}
             <div>
                 <div class="col">
-                    <div class="card-body mb-1">
-                        <h5 class="card-title text-right">{{ message.user_profile }} - {{ message.subject }}</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">{{message.datetime}}</h6>
+                    <div class="card-body {% if user.username != message.user_profile.user.username %} text-end {% endif %} mb-1">
+                        <h6 class="card-title">{{ message.user_profile }} - {{ message.subject }}</h6>
+                        <p class="card-subtitle mb-2 text-body-secondary">{{message.datetime}}</p>
                         <p class="card-text">{{ message.message }}</p>
                         <hr>
                     </div>
