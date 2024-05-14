@@ -1,0 +1,15 @@
+Hello {{ order.full_name }}!
+
+This is a confirmation of your membership order.
+
+Order Number: {{ order.order_number }}
+Order Date: {{ order.date }}
+
+You have instant access to our portal. Let dive in and start your path to better you!
+
+If you have any questions, feel free to contact us at {{ contact_email }}.
+
+Thank you for your order!
+
+Sincerely,
+Anna

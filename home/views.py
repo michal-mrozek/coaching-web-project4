@@ -30,11 +30,14 @@ def contact(request):
         name = request.POST.get('name')
         surname = request.POST.get('surname')
         email = request.POST.get('email')
-        message = request.POST.get('message')
+        sent_message = request.POST.get('message')
+        message = (f'{name} {surname} write: \n'
+                   f'{sent_message}\n\n'
+                   f'You could answer on {email}.')
 
         send_mail(
-            name,
-            surname,
+            "Email from website.",
+            message,
             email,
             ["m.mrozek@hotmail.com"],
             fail_silently=False,
