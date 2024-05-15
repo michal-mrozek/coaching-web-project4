@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, reverse, get_object_or_404
-from .models import MessageChat, Subject
+from django.shortcuts import render, redirect, reverse
+from .models import MessageChat
 from profiles.models import UserProfile
 
 
@@ -14,45 +14,34 @@ def work_with_me(request):
 def portal(request):
     """ A view to return the reason page """
     profile = UserProfile.objects.get(user=request.user)
+    topics = set(MessageChat.objects.values_list('subject'))
     if not profile.premium:
         return redirect(reverse('work_with_me'))
 
     is_coach = False;
     if request.user.groups.filter(name='coaches').exists():
+        query = []
         messages = MessageChat.objects.all()
         is_coach = True
     else:
-        profile = UserProfile.objects.get(user=request.user)
-        messages = MessageChat.objects.filter(user_profile=profile)
-
-    topics = Subject.objects.all()
-    topic_list = []
-
-    if not topics or not messages:
-        print("nie ma rekordow")
-    else:
+        query = []
+        print(topics)
         for topic in topics:
-            record = ["", "", ""]
-            for message in messages:
-                if message.subject == topic:
-                    if record[1] == "" or message.datetime > record[1]:
-                        record[0] = topic
-                        record[1] = message.datetime
-                        record[2] = message.user_profile
-            if record[1] != "":
-                topic_list.append(record)
+            messages = list(MessageChat.objects.filter(user_profile=profile, subject=topic[0]).order_by('-datetime').values())
+            query.append(messages)
 
     if request.method == 'POST':
 
         profile = UserProfile.objects.get(user=request.user)
-        topic = Subject.objects.create(message_subject=request.POST['subject'])
+        subject = request.POST['subject']
         message = request.POST['message']
-        obj = MessageChat(user_profile=profile, subject=topic, message=message)
+        obj = MessageChat(user_profile=profile, subject=subject, message=message)
         obj.save()
         return redirect(reverse('portal'))
 
     context = {
-        'messages': topic_list,
+        'messages': query,
+        'subjects': topics,
         'is_coach': is_coach,
     }
 
@@ -60,43 +49,37 @@ def portal(request):
 
 
 @login_required
-def portal_replay(request, subject_id):
+def portal_replay(request, passed_topic):
+    profile = UserProfile.objects.get(user=request.user)
+    topics = set(MessageChat.objects.values_list('subject'))
+    if not profile.premium:
+        return redirect(reverse('work_with_me'))
 
     is_coach = False;
     if request.user.groups.filter(name='coaches').exists():
+        query = []
         messages = MessageChat.objects.all()
         is_coach = True
     else:
-        profile = UserProfile.objects.get(user=request.user)
-        messages = MessageChat.objects.filter(user_profile=profile)
+        query = []
+        print(topics)
+        for topic in topics:
+            messages = list(
+                MessageChat.objects.filter(user_profile=profile, subject=topic[0]).order_by('-datetime').values())
+            query.append(messages)
 
-
-    topics = Subject.objects.all()
-    topic_list = []
-    for topic in topics:
-        record = ["", "", ""]
-        for message in messages:
-            if message.subject == topic:
-                if record[1] == "" or message.datetime > record[1]:
-                    record[0] = topic
-                    record[1] = message.datetime
-                    record[2] = message.user_profile
-        if record[1] != "":
-            topic_list.append(record)
-    all_messages = MessageChat.objects.all()
-    conversation = all_messages.filter(subject=get_object_or_404(Subject, pk=subject_id))
+    conversation = MessageChat.objects.filter(subject=passed_topic)
 
     if request.method == 'POST':
         profile = UserProfile.objects.get(user=request.user)
         message = request.POST['message']
-        subject = Subject.objects.get(pk=subject_id)
+        subject = passed_topic
         MessageChat.objects.create(user_profile=profile, subject=subject, message=message)
         return redirect(reverse('portal'))
 
     context = {
-        'messages': topic_list,
+        'messages': query,
         'conversation': conversation,
-        'id': subject_id,
         "is_coach": is_coach,
         "user": request.user,
 

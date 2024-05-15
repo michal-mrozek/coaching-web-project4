@@ -16,10 +16,16 @@
     <div class="row pt-3 contener">
         <div class="col-6 text-left">
             <div class="row m-0">
+
+
+                <hr>
+
+
                 {% if messages.length != 0 %}
-                {% for obj in messages %}
-                <a class="text-decoration-none" href="{% url 'portal_replay' obj.0.id %}">
-                    <strong>{{ obj.0.message_subject }}</strong>. Last message on {{ obj.1}}{% if is_coach %} by {{ obj.2 }} {% endif %} </a>
+                {% for message in messages %}
+                <a class="text-decoration-none" href="{% url 'portal_replay' message.0.subject %}">
+                    <strong>{{ message.0.subject }}</strong>. Last message on {{ message.0.datetime }}{% if is_coach %} by {{
+                    message.0.user_profile }} {% endif %} </a>
                 {% endfor %}
                 {% else %}
                 <p class="card-text">You do not have started conversation yet. Feel free to start one below.</p>
@@ -48,8 +54,8 @@
         </div>
 
         <div class="col-6 overflow-y-scroll">
-            {% if id %}
 
+            {% if conversation %}
             {% for message in conversation %}
             <div>
                 <div class="col">
@@ -66,7 +72,8 @@
                 <div class="row justify-content-center">
                     <div class="col text-center">
 
-                        <form class="form-contact form-message mt-5" method="post" action="{% url 'portal_replay' id %}">
+                        <form class="form-contact form-message mt-5" method="post"
+                              action="#">
                             {% csrf_token %}
                             <div class="form-group">
                                 <textarea name="message" placeholder="Message" rows="3" required></textarea>
