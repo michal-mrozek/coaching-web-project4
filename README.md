@@ -1,6 +1,27 @@
 # Coaching Service Application
 
-This is a Django-based web application designed to facilitate the management of a coaching service. It includes features for managing coaches, students, schedules, and sessions. The application aims to provide an efficient and user-friendly platform for both coaches and students.
+This is a Django-based web application designed to facilitate the management of a coaching service. It includes features for managing coaches, clients and chat directly with the coach. The application aims to provide an efficient and user-friendly platform for both coaches and students.
+
+## Coaching Website User Story
+
+**Title:** Coaching Website User Story
+
+**As a** user interested in personal development and growth,
+**I want to** access a coaching website with chat functionality,
+**So that I can** receive real-time support and guidance from experienced coaches.
+
+### Acceptance Criteria:
+
+1. **As a** user, I can easily navigate to the coaching website's homepage.
+2. Upon arrival, I am greeted with a clear call-to-action to begin a chat session with a coach.
+3. I can initiate a chat session with them directly from my profile.
+4. The chat interface should be user-friendly, allowing me to send messages, receive responses promptly.
+
+5. If the coach is unavailable, I should have the option to send an email.
+6. The website should ensure privacy and confidentiality of all conversations between users and coaches.
+7. The website should be accessible on both desktop and mobile devices for users' convenience.
+8. Integration with a secure payment system for paid coaching subscription.
+
 
 ## Table of Contents
 
@@ -15,27 +36,48 @@ This is a Django-based web application designed to facilitate the management of 
 
 ## Features
 
-- **User Authentication**: Secure login and registration for coaches and students.
-- **Profile Management**: Manage coach and student profiles.
-- **Scheduling**: Schedule sessions between coaches and students.
-- **Session Management**: Track and manage coaching sessions.
-- **Notifications**: Email notifications for session reminders and updates.
-- **Payment Integration**: Integration with payment gateways for session payments.
+- **Navigation**: Provides an easy reference to navigate between the 'Home' and other pages
+
+![Nav](static/readme_pics/nav.png)
+
+- **User Authentication**: Secure login and registration for users.
+
+![Login](static/readme_pics/login.png)
+
+- **Profile Management**: Manage user profiles.
+
+![My Profile](static/readme_pics/profile.png)
+
+- **Life chat**: Life discussion between coaches and students.
+
+![Chat](static/readme_pics/chat.png)
+
+- **Email comunication** 
+
+![Email Form](static/readme_pics/email_form.png)
+
+- **Notifications**: Email notifications for orders.
+
+![Email Notification](static/readme_pics/notification.png)
+
+- **Payment Integration**: Integration with payment stripe for subscription payments.
+
+![Payments](static/readme_pics/checkout.png)
 
 ## Installation
 
 ### Prerequisites
 
-- Python 3.8+
-- Django 3.2+
+- Python 3+
+- Django 4.2+
 - PostgreSQL (or any other preferred database)
 
 ### Setup
 
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/yourusername/coaching-service.git
-    cd coaching-service
+    git clone https://github.com/michal-mrozek/coaching-web-project4.git
+    
     ```
 
 2. **Create a virtual environment:**
@@ -75,13 +117,13 @@ This is a Django-based web application designed to facilitate the management of 
 ### Admin Panel
 
 - Access the admin panel at `http://127.0.0.1:8000/admin`.
-- Use the admin panel to manage users, coaches, students, sessions, and schedules.
+- Use the admin panel to manage users, groups, messages,
 
 ### User Interface
 
-- Coaches and students can log in and manage their profiles.
-- Students can book sessions with available coaches.
-- Coaches can manage their schedules and track sessions.
+- User can log in and manage their profiles.
+- Students can access the chat with available coaches.
+- Coaches can manage their chat.
 
 
 ## Configuration
@@ -100,7 +142,7 @@ EMAIL_HOST_PASSWORD=your_email_password
 ```
 
 ## Manual Tests
-### User Authentication
+
 
 1 **Register a new user**
 
@@ -112,22 +154,32 @@ EMAIL_HOST_PASSWORD=your_email_password
 - Update user profile information.
 - Verify that the changes are reflected correctly.
 
-3 **Scheduling**
+3 **Chat**
 
-- Create a new session as a coach.
-- Book a session as a student.
-- Verify that the session appears correctly in both coach and student schedules.
+- Create a new chat as user.
+- Answer as a coach.
+- Verify that the conversation appears correctly in both coach and student chat.
 
 4 **Notifications**
 
-- Ensure email notifications are sent for session reminders and updates.
+- Ensure email notifications are sent for log in and orders.
 - Verify that the email content is correct.
 
 5 **Payment Integration**
 
-- Test the payment process using test credentials from the payment gateway.
+- Test the payment process using test credentials from the stripe.
 - Ensure that successful payments are processed and reflected correctly in the system.
 - Verify that failed payments are handled gracefully.
+
+### Unsolved logic problem/bugs
+
+1 **List of conversations date**
+
+- List of open conversation fetch wrong date. The chat creation date instead of date of the last message within conversation.
+
+2 **No styling on log in and log out pages**
+
+- Embarrassing detail - no enough time to finish cosmetic part of authorisation.
 
 ### License
 This project is licensed under the MIT License.
