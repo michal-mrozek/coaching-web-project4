@@ -27,16 +27,20 @@ def portal(request):
 
     topics = Subject.objects.all()
     topic_list = []
-    for topic in topics:
-        record = ["", "", ""]
-        for message in messages:
-            if message.subject == topic:
-                if record[1] == "" or message.datetime > record[1]:
-                    record[0] = topic
-                    record[1] = message.datetime
-                    record[2] = message.user_profile
-        if record[1] != "":
-            topic_list.append(record)
+
+    if not topics or not messages:
+        print("nie ma rekordow")
+    else:
+        for topic in topics:
+            record = ["", "", ""]
+            for message in messages:
+                if message.subject == topic:
+                    if record[1] == "" or message.datetime > record[1]:
+                        record[0] = topic
+                        record[1] = message.datetime
+                        record[2] = message.user_profile
+            if record[1] != "":
+                topic_list.append(record)
 
     if request.method == 'POST':
 
