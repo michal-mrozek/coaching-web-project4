@@ -17,15 +17,13 @@
         <div class="col-6 text-left">
             <div class="row m-0">
 
-
                 <hr>
 
-
-                {% if messages.length != 0 %}
+                {% if messages %}
                 {% for message in messages %}
                 <a class="text-decoration-none" href="{% url 'portal_replay' message.0.subject %}">
-                    <strong>{{ message.0.subject }}</strong>. Last message on {{ message.0.datetime }}{% if is_coach %} by {{
-                    message.0.user_profile }} {% endif %} </a>
+                    <strong>{{ message.0.subject }}</strong>. Last message on {{ message.0.datetime }}
+                    {% if is_coach %} by {{ message.0.user_profile_id }} {% endif %} </a>
                 {% endfor %}
                 {% else %}
                 <p class="card-text">You do not have started conversation yet. Feel free to start one below.</p>

@@ -18,17 +18,21 @@ def portal(request):
     if not profile.premium:
         return redirect(reverse('work_with_me'))
 
-    is_coach = False;
+    is_coach = False
     if request.user.groups.filter(name='coaches').exists():
         query = []
-        messages = MessageChat.objects.all()
+        for topic in topics:
+            messages = list(
+                MessageChat.objects.filter(subject=topic[0]).values())
+            query.append(messages)
         is_coach = True
     else:
         query = []
-        print(topics)
         for topic in topics:
-            messages = list(MessageChat.objects.filter(user_profile=profile, subject=topic[0]).order_by('-datetime').values())
-            query.append(messages)
+            messages = list(
+                MessageChat.objects.filter(user_profile=profile, subject=topic[0]).order_by('-datetime').values())
+            if messages:
+                query.append(messages)
 
     if request.method == 'POST':
 
@@ -55,18 +59,23 @@ def portal_replay(request, passed_topic):
     if not profile.premium:
         return redirect(reverse('work_with_me'))
 
-    is_coach = False;
+    is_coach = False
     if request.user.groups.filter(name='coaches').exists():
+        print('jestem tutaj')
         query = []
-        messages = MessageChat.objects.all()
+        for topic in topics:
+            messages = list(
+                MessageChat.objects.filter(subject=topic[0]).order_by('datetime').values())
+            query.append(messages)
         is_coach = True
     else:
+        print('jestem tutaj w else')
         query = []
-        print(topics)
         for topic in topics:
             messages = list(
                 MessageChat.objects.filter(user_profile=profile, subject=topic[0]).order_by('-datetime').values())
-            query.append(messages)
+            if messages:
+                query.append(messages)
 
     conversation = MessageChat.objects.filter(subject=passed_topic)
 
