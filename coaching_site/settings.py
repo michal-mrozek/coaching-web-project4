@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 import crispy_bootstrap5
 from dotenv import load_dotenv
@@ -123,12 +124,16 @@ WSGI_APPLICATION = 'coaching_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+     'default': dj_database_url.parse('postgres://ua4xfebd2cq:LEFDqLjXOCYc@ep-gentle-mountain-a23bxz6h.eu-central-1.aws.neon.tech/gift_coat_agony_626167')
+ }
 
 
 # Password validation
